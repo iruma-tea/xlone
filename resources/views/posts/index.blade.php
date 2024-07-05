@@ -10,5 +10,20 @@
                 <x-input-error :messages="$errors->get('content')" />
             </div>
         </form>
+        <div class="mt-6">
+            @foreach ($posts as $post)
+                <div class="mt-2 p-6 bg-white border-2 border-b-gray-400 rounded-4">
+                    <span class="text-gray-600">{{ $post->user->name }}</span>
+                    <div class="mt-l text-lg">{{ $post->content }}</div>
+                    @if ($post->user->is(auth()->user()))
+                        <div class="ml-auto mt-auto">
+                            <form action="{{ route('posts.edit', $post) }}" method="get">
+                                <x-secondary-button type="submit">Edit</x-secondary-button>
+                            </form>
+                        </div>
+                    @endif
+                </div>
+            @endforeach
+        </div>
     </div>
 </x-app-layout>

@@ -17,7 +17,9 @@ class PostController extends Controller
         // dump($user->posts());
         // $post = new Post();
         // dd($post->user());
-        return view('posts.index');
+        return view('posts.index', [
+            'posts' => Post::with('user')->latest()->get(),
+        ]);
     }
 
     public function store(PostRequest $request): RedirectResponse
@@ -27,5 +29,12 @@ class PostController extends Controller
         $request->user()->posts()->create($validated);
 
         return redirect(route('posts.index'));
+    }
+
+    public function edit(Post $post): View
+    {
+        return view('posts.edit', [
+            'post' => $post,
+        ]);
     }
 }
