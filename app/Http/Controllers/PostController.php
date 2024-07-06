@@ -37,4 +37,13 @@ class PostController extends Controller
             'post' => $post,
         ]);
     }
+
+    public function update(PostRequest $request, Post $post): RedirectResponse
+    {
+        $validated = $request->validated();
+
+        $post->update($validated);
+
+        return redirect(route('posts.index'));
+    }
 }

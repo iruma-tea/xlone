@@ -14,7 +14,13 @@
             @foreach ($posts as $post)
                 <div class="mt-2 p-6 bg-white border-2 border-b-gray-400 rounded-4">
                     <span class="text-gray-600">{{ $post->user->name }}</span>
-                    <div class="mt-l text-lg">{{ $post->content }}</div>
+                    {{-- <div class="mt-l text-lg">{{ $post->content }}</div> --}}
+                    <div class="mt-1 text-lg">
+                        {{ $post->content }}
+                        @unless ($post->created_at->eq($post->updated_at))
+                            <span class="text-sm text-gray-600 ml-auto">(edited)</span>
+                        @endunless
+                    </div>
                     @if ($post->user->is(auth()->user()))
                         <div class="ml-auto mt-auto">
                             <form action="{{ route('posts.edit', $post) }}" method="get">
