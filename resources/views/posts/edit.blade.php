@@ -15,6 +15,13 @@
                 </div>
                 <x-input-error :messages="$errors->get('content')" />
             </form>
+            <div class="mt-4 flex justify-end">
+                <form method="POST" action="{{ route('posts.delete', $post) }}">
+                    @csrf
+                    @method('delete')
+                    <x-secondary-button type="submit" class="h-ll">Delete the Post</x-secondary-button>
+                </form>
+            </div>
         </div>
     </div>
 </x-app-layout>

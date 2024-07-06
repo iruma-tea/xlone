@@ -51,4 +51,15 @@ class PostController extends Controller
 
         return redirect(route('posts.index'));
     }
+
+    public function delete(Post $post): RedirectResponse
+    {
+        Gate::authorize('delete', $post);
+
+        $post->delete();
+
+        session()->flash('message', 'deleted the post');
+
+        return redirect(route('posts.index'));
+    }
 }

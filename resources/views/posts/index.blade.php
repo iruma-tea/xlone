@@ -1,5 +1,8 @@
 <x-app-layout>
     <div class="max-w-xl mx-auto p-4">
+        @if (session('message'))
+            <div class="bg-red-100 text-red400 p-2 mb-6 rounded">{{ session('message') }}</div>
+        @endif
         <form action="{{ route('posts.store') }}" method="post">
             @csrf
             <div class="flex">
